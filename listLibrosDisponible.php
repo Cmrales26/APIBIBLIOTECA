@@ -14,7 +14,7 @@ if ($metodo != "GET") {
 require_once "conexion.php";
 
 try {
-	$consulta = "SELECT * FROM libro WHERE disponibles >= 1";
+	$consulta = "SELECT * FROM libro WHERE disponibles >= 1 AND status = 1";
 	$st = $con->prepare($consulta);
 	$st->execute();
 	$resultado = $st->fetchAll(PDO::FETCH_ASSOC);
