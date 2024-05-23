@@ -22,7 +22,7 @@ if (isset($_GET["id"])) {
         $v = array($id);
         $r = $st->execute($v);
 
-        $prestamo = $st->fetch(PDO::FETCH_ASSOC);
+        $prestamo = $st->fetchAll(PDO::FETCH_ASSOC);
 
         if ($prestamo) {
             http_response_code(200);
