@@ -13,18 +13,18 @@ if ($metodo != "DELETE") {
 require_once "../conexion.php";
 
 if (isset($_GET["id"]) && isset($_GET["lib_id"])) {
-    $id_prestamo = $_GET["id"];
+    $_id = $_GET["id"];
     $id_libro = $_GET["lib_id"];
     try {
 
-        $consulta = "DELETE from prestamo where id_prestamo = ? ";
+        $consulta = "DELETE from prestamo where _id = ? AND _id_libro = ?";
         $st = $con->prepare($consulta);
-        $v = array($id_prestamo);
+        $v = array($_id, $id_libro);
         $st->execute($v);
 
         $row = $st->rowCount();
         if ($row > 0) {
-            echo json_encode(array("respuesta" => "Préstamo eliminado con éxito"));
+            echo json_encode(array("respuesta" => "Préstamo devuelto con éxito"));
             actualizarDisponiblesLibro($id_libro, $con);
         } else {
             http_response_code(400);
