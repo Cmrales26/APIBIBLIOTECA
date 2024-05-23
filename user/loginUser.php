@@ -26,7 +26,7 @@ if (isset($_POST["id"]) && isset($_POST["contraseña"])) {
     }
 
     try {
-        $consulta = "SELECT id, nombre, apellido, genero,correo,telefono FROM usuario WHERE id = ? AND contraseña = ?";
+        $consulta = "SELECT id, nombre, apellido, genero,correo,telefono, rol FROM usuario WHERE id = ? AND contraseña = ? AND rol <> 'admin'";
         $st = $con->prepare($consulta);
         $v = array($id, $contraseña);
         $r = $st->execute($v);
@@ -34,7 +34,7 @@ if (isset($_POST["id"]) && isset($_POST["contraseña"])) {
         $resultado = $st->fetchAll(PDO::FETCH_ASSOC);
 
         if ($resultado) {
-            http_response_code(201);
+            http_response_code(200);
             echo json_encode(array("respuesta" => "Login", "user" => $resultado));
             die();
         } else {
