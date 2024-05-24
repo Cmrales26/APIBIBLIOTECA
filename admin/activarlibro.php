@@ -22,7 +22,7 @@ if (isset($_GET["id"])) {
         $r = $st->execute($v);
 
         if ($r === TRUE) {
-            echo json_encode(array("respuesta" => "Libro Desactivado"));
+            echo json_encode(array("respuesta" => "Libro Activado"));
         } else {
             http_response_code(500);
             $v = array("respuesta" => "Error al actualizar el estatus:");
